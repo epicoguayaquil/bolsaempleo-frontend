@@ -10,7 +10,7 @@ Proporcionar al usuario una herramienta para la publicación de las ofertas labo
 Para levantar el proyecto, ejecutar:
 ```bash
 npm run start:bolsa-empleo
-
+```
 ## Estructura del Proyecto
 - src
 	- app
