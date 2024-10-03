@@ -1,0 +1,7 @@
+<p-multiSelect  #select
+    [options]="listaItems" 
+    [(ngModel)]="selectItems" 
+    optionLabel="nombre" 
+    [disabled]="isDisabled"
+    [style]="{'width': '100%'}"
+    placeholder="SELECCIONA {{tipo_catalogo}}" />

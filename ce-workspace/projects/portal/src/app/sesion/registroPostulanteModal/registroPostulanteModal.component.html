@@ -1,0 +1,3 @@
+<p-dialog header="Registrar Postulante" [modal]="true" [(visible)]="visible" [style]="{ width: '75rem' }" (onHide)="_cancelar()">
+  <app-registroPostulante (registrado)="_registrado($event)"></app-registroPostulante>
+</p-dialog>

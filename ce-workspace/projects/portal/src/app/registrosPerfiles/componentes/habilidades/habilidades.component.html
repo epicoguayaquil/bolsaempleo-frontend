@@ -1,0 +1,57 @@
+<form [formGroup]="formDatos" Class="col-complete">
+
+  <div class="align-items-center justify-content-center">
+    
+    <div class="grid">
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 flex justify-content-center">
+        <h3>PERFIL Y HABILIDADES</h3>
+      </div>
+  
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <h4>SELECCIONA EL O LOS PERFILES</h4>
+        <p-listbox *ngIf="listaPerfiles"
+          [filter]="true" 
+          [options]="listaPerfiles" 
+          formControlName="perfiles"
+          optionLabel="etiqueta" 
+          [style]="{'width':'100%'}" 
+          [multiple]="true" 
+          [metaKeySelection]="false" 
+          [checkbox]="true"
+          />
+        <p-card *ngIf="!listaPerfiles" [style]="{'width':'100%'}">
+          <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px" />
+          <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px" />
+          <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px" />
+        </p-card>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <h4>SELECCIONA TUS HABILIDADES</h4>
+        <p-accordion [multiple]="true" [activeIndex]="[0]">
+          <p-accordionTab header="{{grupo.nombre}}" *ngFor="let grupo of listaGrupoHabilidades; let i=index">
+            <p-listbox 
+              [filter]="true" 
+              [options]="grupo.lista" 
+              formControlName="habilidad-{{i}}"
+              optionLabel="etiqueta" 
+              [style]="{'width':'100%'}" 
+              [multiple]="true" 
+              [metaKeySelection]="false" 
+              [checkbox]="true"
+             />
+          </p-accordionTab>
+
+          <p-accordionTab header="OTRAS HABILIDADES O CONOCIMIENTOS">
+            <label>Agrega hablidades digitando el texto y presionando "ENTER"</label>
+            <div class="card p-fluid">
+              <p-chips formControlName="otras_habilidades" />
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+        
+      </div>
+    </div>
+  </div>
+</form>

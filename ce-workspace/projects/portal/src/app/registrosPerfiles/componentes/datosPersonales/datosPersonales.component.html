@@ -1,0 +1,141 @@
+<form [formGroup]="formDatos" Class="col-complete" autocomplete="off">
+  <div class="flex align-items-center justify-content-center">
+    
+    <div class="grid">
+      
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 flex justify-content-center" *ngIf="visibletitulo">
+        <h3>DATOS PERSONALES</h3>
+      </div>
+
+      <div class="{{classFiels}} flex justify-content-center pt-4" *ngIf="mostrarCampo('tipo_identificacion')">
+        <p-selectButton [options]="tiposIdentificacion" formControlName="tipo_identificacion" 
+        optionLabel="label" optionValue="value" (ngModelChange)="consultarDatos()" />
+      </div>
+  
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('identificacion')">
+        <label for="identificacion">Identificacion</label>
+        <p-iconField iconPosition="right">
+          <input pInputText id="identificacion" formControlName="identificacion" class="col-complete"
+              [ngClass]="{'ng-invalid': fieldIsValid('identificacion'), 'ng-dirty': fieldIsValid('identificacion')}"
+              ngClass="col-complete" (blur)="consultarDatos()"
+              />
+          <p-inputIcon styleClass="pi pi-spinner pi-spin" *ngIf="loading" />
+        </p-iconField>
+        <app-formMensageError [control]="formDatos.controls['identificacion']" [submited]="submited"></app-formMensageError>
+      </div>
+  
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('nombre')">
+        <label for="nombre">Nombres</label>
+        <input pInputText id="nombre" formControlName="nombre" class="col-complete"
+              appUppercase
+              [ngClass]="{'ng-invalid': fieldIsValid('nombre'), 'ng-dirty': fieldIsValid('nombre')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['nombre']" [submited]="submited"></app-formMensageError>
+      </div>
+  
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('apellido')">
+        <label for="apellido">Apellidos</label>
+        <input pInputText id="apellido" formControlName="apellido" class="col-complete"
+              appUppercase
+              [ngClass]="{'ng-invalid': fieldIsValid('apellido'), 'ng-dirty': fieldIsValid('apellido')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['apellido']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('pais_natal')">
+        <label for="id_provincia">Nacionalidad:</label>
+        <app-selectPais formControlName="pais_natal" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('pais_natal'), 'ng-dirty': fieldIsValid('pais_natal')}"></app-selectPais>
+        <app-formMensageError [control]="formDatos.controls['pais_natal']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_ciudad_nacimiento')">
+        <label for="id_ciudad">Ciudad de nacimiento:</label>
+        <app-selectCiudad formControlName="id_ciudad_nacimiento" [returnId]="true" 
+          [pais]="this.formDatos.controls['pais_natal'].value"
+          [searchOnlyByCountry]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_ciudad_nacimiento'), 'ng-dirty': fieldIsValid('id_ciudad_nacimiento')}"></app-selectCiudad>
+        <app-formMensageError [control]="formDatos.controls['id_ciudad_nacimiento']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_provincia')">
+        <label for="id_provincia">Provincia de residencia:</label>
+        <app-selectProvincia formControlName="id_provincia" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_provincia'), 'ng-dirty': fieldIsValid('id_provincia')}"></app-selectProvincia>
+        <app-formMensageError [control]="formDatos.controls['id_provincia']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_ciudad')">
+        <label for="id_ciudad">Ciudad de residencia:</label>
+        <app-selectCiudad formControlName="id_ciudad" [returnId]="true" 
+          [provincia]="this.formDatos.controls['id_provincia'].value"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_ciudad'), 'ng-dirty': fieldIsValid('id_ciudad')}"></app-selectCiudad>
+        <app-formMensageError [control]="formDatos.controls['id_ciudad']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_genero')">
+        <label for="id_genero">Genero:</label>
+        <app-selectGenero formControlName="id_genero" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_genero'), 'ng-dirty': fieldIsValid('id_genero')}"></app-selectGenero>
+        <app-formMensageError [control]="formDatos.controls['id_genero']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('fecha_nacimiento')">
+        <label for="fecha_nacimiento">Fecha nacimiento</label>
+        <p-inputMask mask="9999-99-99" placeholder="9999-12-31" formControlName="fecha_nacimiento" slotChar="yyyy-mm-dd" 
+          [ngClass]="{'ng-invalid': fieldIsValid('fecha_nacimiento'), 'ng-dirty': fieldIsValid('fecha_nacimiento')}"
+          class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['fecha_nacimiento']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_estado_civil')">
+        <label for="id_estado_civil">Estado Civil:</label>
+        <app-selectEstadoCivil formControlName="id_estado_civil" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_estado_civil'), 'ng-dirty': fieldIsValid('id_estado_civil')}"></app-selectEstadoCivil>
+        <app-formMensageError [control]="formDatos.controls['id_estado_civil']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}} flex justify-content-center pading-check" *ngIf="mostrarCampo('carnet_discapacidad')">
+        <p-inputSwitch formControlName="carnet_discapacidad" 
+          [ngClass]="{'ng-invalid': fieldIsValid('carnet_discapacidad'), 'ng-dirty': fieldIsValid('carnet_discapacidad')}"/>
+        <label for="carnet_discapacidad">Posee discapacidad</label>
+        <app-formMensageError [control]="formDatos.controls['carnet_discapacidad']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('telefono')">
+        <label for="telefono">Teléfono:</label>
+        <p-inputMask mask="99-99999999"  placeholder="99-99999999" formControlName="telefono"
+          [ngClass]="{'ng-invalid': fieldIsValid('telefono'), 'ng-dirty': fieldIsValid('telefono')}"
+          class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['telefono']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('telefono_fijo')">
+        <label for="telefono_fijo">Teléfono fijo: </label>
+        <p-inputMask mask="(99)-9999999"  placeholder="(99)-9999999" formControlName="telefono_fijo" 
+          [ngClass]="{'ng-invalid': fieldIsValid('telefono_fijo'), 'ng-dirty': fieldIsValid('telefono_fijo')}"
+          class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['telefono_fijo']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('email')">
+        <label for="email">Email:</label>
+        <input pInputText id="email" formControlName="email" class="col-complete"
+              [ngClass]="{'ng-invalid': fieldIsValid('email'), 'ng-dirty': fieldIsValid('email')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['email']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <ng-content></ng-content>
+      
+    </div>
+    
+  </div>
+
+</form>

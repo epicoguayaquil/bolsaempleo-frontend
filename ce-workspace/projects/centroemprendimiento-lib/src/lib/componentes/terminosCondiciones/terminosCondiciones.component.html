@@ -1,0 +1,44 @@
+
+  <div class="flex align-items-center justify-content-center">
+    <div class="grid col-complete">
+      <div class="col-12">
+        <form [formGroup]="formDatosTodos">
+        <p-inputGroup ngClass="col-complete" class="col-complete" styleClass="col-complete">
+          <p-inputGroupAddon><p-checkbox formControlName='marcar_todos' [binary]="true" (onChange)="toggleAll()"/></p-inputGroupAddon>
+          <input type="text" pInputText value="Acepto todos términos y condiciones" readonly/>
+          <p-inputGroupAddon><p-button [icon]="verTerminosCondiciones ? 'pi pi-eye-slash' : 'pi pi-eye'" (onClick)="verTerminosCondiciones = !verTerminosCondiciones" /></p-inputGroupAddon>
+        </p-inputGroup>
+      </form>
+      </div>
+        
+      
+      <div class="col-12">
+
+        <p-card header="AUTORIZACIÓN DE TRATAMIENTO DE INFORMACIÓN PERSONAL" *ngIf="verTerminosCondiciones">
+          <form [formGroup]="formDatos">
+            <div class="alert alert-primary" role="alert" style="text-align: justify;">
+              <p>
+                <strong>EMPRESA PÚBLICA MUNICIPAL PARA LA GESTIÓN DE LA INNOVACIÓN Y LA COMPETITIVIDAD, EP,</strong> en adelante ÉPICO, 
+                se compromete a proteger y respetar tu privacidad de conformidad con lo dispuesto en la norma legal vigente sobre protección de datos personales, 
+                por lo que el participante conocedor de sus derechos declara de manera libre y voluntaria lo siguiente:
+              </p>
+              
+              <div *ngFor="let termino of listaTerminosCondiciones; let i=index">
+                <p-inputSwitch [formControlName]="termino.nombre" [inputId]="termino.nombre"
+                  [ngClass]="{'ng-invalid': fieldIsValid(termino.nombre), 'ng-dirty': fieldIsValid(termino.nombre)}"/>
+                <label [for]="termino.nombre"><strong>{{termino.titulo}}</strong></label>
+                <p-tag *ngIf="fieldIsValid(termino.nombre)" severity="danger" value="Este campo es requerido"/>
+                <div [innerHTML]="termino.descripcion"></div>
+              </div>
+              <p>
+                Como titular de los datos, fui informado de los derechos con que cuento para conocer, actualizar y rectificar mi información personal o revocar la autorización, 
+                lo cual podré ejercerlo a través del correo electrónico ( <a href="info@epico.gob.ec"> info&#64;epico.gob.ec </a> ) o 
+                mediante comunicación escrita entregada en las oficinas de ÉPICO.
+              </p>
+        
+            </div>
+          </form>
+        </p-card>
+      </div>
+    </div>
+  </div>

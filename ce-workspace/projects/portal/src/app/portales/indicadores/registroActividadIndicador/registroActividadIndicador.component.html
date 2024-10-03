@@ -1,0 +1,110 @@
+<form [formGroup]="formDatos" Class="col-complete">
+
+  <div class="flex align-items-center justify-content-center">
+    <div class="grid grid-form">
+
+      <div class="col-6 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="nombre">Indicador: </label>
+        <app-selectCatalogoEmpleabilidad formControlName="id_indicador" [returnId]="true" class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_indicador'), 'ng-dirty': fieldIsValid('id_indicador')}"></app-selectCatalogoEmpleabilidad>
+        <app-formMensageError [control]="formDatos.controls['id_indicador']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="nombre">Programa: </label>
+        <app-selectProgramaIndicador formControlName="id_programa" [returnId]="true" class="app-select"
+        [ngClass]="{'ng-invalid': fieldIsValid('id_programa'), 'ng-dirty': fieldIsValid('id_programa')}"
+        [permitirAgregar]="true"></app-selectProgramaIndicador>
+        <app-formMensageError [control]="formDatos.controls['id_programa']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="nombre">Sub Programa: </label>
+        <app-selectSubPrograma formControlName="id_sub_programa" [id_programa]="this.formDatos.controls['id_programa'].value" [returnId]="true" class="app-select"
+        [ngClass]="{'ng-invalid': fieldIsValid('id_sub_programa'), 'ng-dirty': fieldIsValid('id_sub_programa')}"
+        [permitirAgregar]="true"></app-selectSubPrograma>
+        <app-formMensageError [control]="formDatos.controls['id_sub_programa']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="nombre">Actividad: </label>
+        <input pInputText formControlName="actividad" placeholder="Actividad" class="col-complete"
+        [ngClass]="{'ng-invalid': fieldIsValid('actividad'), 'ng-dirty': fieldIsValid('actividad')}" ngClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['actividad']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Fecha: </label><br>
+        <p-inputMask formControlName="fecha" mask="9999-99-99" class="col-complete" styleClass="col-complete"
+          placeholder="9999-99-99" 
+          [ngClass]="{'ng-invalid': fieldIsValid('fecha'), 'ng-dirty': fieldIsValid('fecha')}"
+          slotChar="yyyy-mm-dd" />
+        <app-formMensageError [control]="formDatos.controls['fecha']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Empresa Aliada: </label>
+        <app-selectEmpresasAliadas formControlName="id_empresa_aliada" [returnId]="true" class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_empresa_aliada'), 'ng-dirty': fieldIsValid('id_empresa_aliada')}"
+          [permitirAgregar]="true"></app-selectEmpresasAliadas>
+        <app-formMensageError [control]="formDatos.controls['id_empresa_aliada']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Ejes: </label>
+        <app-selectCatalogoEmpleabilidadMultiple tipo_catalogo="EJES" formControlName="ejes"></app-selectCatalogoEmpleabilidadMultiple>
+        <app-formMensageError [control]="formDatos.controls['ejes']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Registrados: </label>
+        <p-inputNumber inputId="integeronly" formControlName="registrados" placeholder="Registrados"
+        [ngClass]="{'ng-invalid': fieldIsValid('registrados'), 'ng-dirty': fieldIsValid('registrados')}" class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['registrados']" [submited]="submited"></app-formMensageError> 
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Asistentes: </label>
+        <p-inputNumber inputId="integeronly" formControlName="asistentes" placeholder="Asistentes" 
+        [ngClass]="{'ng-invalid': fieldIsValid('asistentes'), 'ng-dirty': fieldIsValid('asistentes')}" class="col-complete" styleClass="col-complete"/> 
+        <app-formMensageError [control]="formDatos.controls['asistentes']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Recursos Empresa Aliada: </label>
+        <p-inputNumber formControlName="recursos_empresa" placeholder="Recursos Empresa" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" 
+        [ngClass]="{'ng-invalid': fieldIsValid('recursos_empresa'), 'ng-dirty': fieldIsValid('recursos_empresa')}" class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['recursos_empresa']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+        <label for="nombre">Recursos Epico: </label>
+        <p-inputNumber formControlName="recursos_epico" placeholder="Recursos Epico" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" 
+        [ngClass]="{'ng-invalid': fieldIsValid('recursos_epico'), 'ng-dirty': fieldIsValid('recursos_epico')}" class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['recursos_epico']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-8 lg:col-8 xl:col-8">
+        <label for="nombre">Departamento: </label>
+        <app-selectDepartamento formControlName="id_departamento" [returnId]="true" class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_departamento'), 'ng-dirty': fieldIsValid('id_departamento')}"></app-selectDepartamento>
+        <app-formMensageError [control]="formDatos.controls['id_departamento']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+        <label for="nombre">Observación: </label>
+        <textarea rows="3" cols="10" pInputTextarea formControlName="observacion"
+        [ngClass]="{'ng-invalid': fieldIsValid('observacion'), 'ng-dirty': fieldIsValid('observacion')}" ngClass="col-complete" class="col-complete"></textarea>
+        <app-formMensageError [control]="formDatos.controls['observacion']" [submited]="submited"></app-formMensageError>
+      </div>
+
+
+    </div>
+  </div>
+
+</form>
+
+<div class="flex justify-content-end gap-2">
+  <p-button label="Cancelar" severity="secondary" (click)="cancelar()" />
+  <p-button label="Guardar" (click)="grabar()" />
+</div>

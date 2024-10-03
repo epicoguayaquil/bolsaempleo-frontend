@@ -1,0 +1,14 @@
+<p-multiSelect 
+    [options]="listaItemsEstructurada" 
+    [group]="true" 
+    [(ngModel)]="selectItems" 
+    [disabled]="isDisabled"
+    placeholder="SELECCIONA EL TIPO DE FINANCIAMIENTO"
+    [style]="{'width': '100%'}"
+    scrollHeight="250px">
+        <ng-template let-group pTemplate="group">
+            <div class="flex align-items-center">
+                <span>{{ group.label }}</span>
+            </div>
+        </ng-template>
+</p-multiSelect>

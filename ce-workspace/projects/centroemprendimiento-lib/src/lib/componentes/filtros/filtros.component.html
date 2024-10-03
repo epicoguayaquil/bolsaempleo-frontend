@@ -1,0 +1,38 @@
+<div class="flex justify-content-center {{className}}" [style]="{'width': '100%'}">
+  <p-fieldset legend="Flitros" [toggleable]="true" ngClass="col-complete">
+      
+    <div class="col-12">
+        <app-selectMultipleEtiquetas [(ngModel)]="etiquetas" [visible]="optionsConfig.etiquetas" [tipo_etiqueta]="optionsConfig.tipo_etiqueta" [style]="{'width': '95%'}">
+            
+            <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3" *ngIf="optionsConfig?.institucion">
+              <label for="birth_date">INSTITUCIÓN</label>
+              <app-selectInstituciones [(ngModel)]="institucion" [returnId]="true" [style]="{'width': '95%'}"></app-selectInstituciones>
+            </div>
+
+            <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3" *ngIf="optionsConfig?.organizacion">
+              <label for="birth_date">EMPRESA</label>
+              <app-selectBolsaEmpleoOrganizacion [(ngModel)]="organizacion" [returnId]="true" [style]="{'width': '95%'}"></app-selectBolsaEmpleoOrganizacion>
+            </div>
+
+            <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3" *ngIf="optionsConfig?.fecha_desde">
+                <label for="birth_date">Fecha Desde:</label>
+                <p-calendar inputId="fecha_desde" [(ngModel)]="fecha_desde" dateFormat="yy-mm-dd" styleClass="col-12"/>
+            </div>
+
+            <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3" *ngIf="optionsConfig?.fecha_hasta">
+                <label for="birth_date">Fecha Hasta: </label>
+                <p-calendar inputId="fecha_hasta" [(ngModel)]="fecha_hasta" dateFormat="yy-mm-dd" styleClass="col-12"/>
+            </div>
+            
+        </app-selectMultipleEtiquetas>
+    </div>
+      
+      <div class="flex align-items-center justify-content-center pt-3">
+        <p-button 
+        label="Buscar" 
+        icon="pi pi-check" 
+        [loading]="loading" 
+        (onClick)="load()" />
+      </div>
+  </p-fieldset>
+</div>

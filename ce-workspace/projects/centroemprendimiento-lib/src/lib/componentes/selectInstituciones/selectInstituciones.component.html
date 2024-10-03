@@ -1,0 +1,22 @@
+<p-dropdown 
+    [options]="listaItems"
+    [(ngModel)]="selectItem"
+    optionLabel="nombre"
+    [filter]="true"
+    filterBy="nombre" 
+    [showClear]="true"
+    [loading]="this.loading"
+    [style]="style"
+    [disabled]="isDisabled"
+    placeholder="Selecciona una institución">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption.nombre }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-institucion pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ institucion.nombre }}</div>
+            </div>
+        </ng-template>
+</p-dropdown>

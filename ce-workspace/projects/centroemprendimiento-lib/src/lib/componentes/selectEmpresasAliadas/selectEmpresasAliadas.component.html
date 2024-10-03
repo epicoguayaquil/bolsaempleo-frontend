@@ -1,0 +1,58 @@
+<p-inputGroup>
+  <p-inputGroupAddon *ngIf="permitirAgregar" (click)="nuevo()"><i class="pi pi-plus"></i></p-inputGroupAddon>
+  <p-dropdown #select
+  [options]="listaItems"
+  [(ngModel)]="selectItem"
+  optionLabel="nombre"
+  [filter]="true"
+  filterBy="nombre" 
+  [showClear]="true"
+  [loading]="this.loading"
+  [disabled]="isDisabled"
+  [style]="{'width': '100%'}"
+  placeholder="Selecciona el empresa aliada">
+      <ng-template pTemplate="selectedItem" let-selectedOption>
+          <div class="flex align-items-center gap-2">
+              <div>{{ selectedOption.nombre }}</div>
+          </div>
+      </ng-template>
+      <ng-template let-empresa pTemplate="item">
+          <div class="flex align-items-center gap-2">
+              <div>{{ empresa.nombre }}</div>
+          </div>
+      </ng-template>
+  </p-dropdown>
+</p-inputGroup>
+
+
+<p-dialog header="Registrar Empresa Aliada" [modal]="true" [(visible)]="visibleModal" [style]="{ width: '25rem' }">
+
+  <form [formGroup]="formDatos" Class="col-complete">
+      <div class="grid grid-form">
+
+          <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+              <div class="flex align-items-center gap-3 mb-3">
+                  <label for="username" class="font-semibold w-6rem">Nombre:</label>
+                  <input pInputText class="flex-auto" autocomplete="off" formControlName="nombre" 
+                  [ngClass]="{'ng-invalid': fieldIsValid('nombre'), 'ng-dirty': fieldIsValid('nombre')}"/>
+              </div>
+              <app-formMensageError [control]="formDatos.controls['nombre']"></app-formMensageError>
+          </div>
+
+          <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+              <div class="flex align-items-center gap-3 mb-3">
+                  <label for="username" class="font-semibold w-6rem">Estado:</label>
+                  <p-selectButton [options]="listaEstado" formControlName="estado" optionLabel="nombre" optionValue="id" />
+              </div>
+              <app-formMensageError [control]="formDatos.controls['estado']"></app-formMensageError>
+          </div>
+          
+      </div>
+  </form>
+
+  <div class="flex justify-content-end gap-2">
+      <p-button label="Cancelar" severity="secondary" (click)="visibleModal = false" />
+      <p-button label="Guardar" (click)="guardar()" />
+  </div>
+
+</p-dialog>

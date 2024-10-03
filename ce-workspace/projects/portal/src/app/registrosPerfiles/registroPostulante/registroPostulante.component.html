@@ -1,0 +1,130 @@
+
+<p-stepper>
+  <p-stepperPanel header="Datos Personales">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+          <div class="flex flex-column">
+              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                  <app-datosPersonales [(ngModel)]="datosPersonales" #datosPersonalesComponent
+                  ngClass="col-complete p-4" [submited]="submited" (consultarCedula)="identificadorCambios()"
+                  [loading]="loading" [disable]="deshabilitarDatosPersonales" [fieldsToDisable]="fieldsToDisableDatosPersonales"></app-datosPersonales>
+              </div>
+          </div>
+          <div class="flex pt-4 justify-content-end">
+              <p-button 
+                  label="Next" 
+                  icon="pi pi-arrow-right" 
+                  iconPos="right" 
+                  [loading]="this.loading"
+                  (onClick)="siguiente(nextCallback, datosPersonalesComponent)" />
+          </div>
+      </ng-template>
+  </p-stepperPanel>
+
+  <p-stepperPanel header="Formación Académica">
+      <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+          <div class="flex flex-column">
+              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                  <app-formacionAcademica [(ngModel)]="formacionAcademica" #formacionAcademicaComponent
+                    ngClass="col-complete p-4" [submited]="submited" [disable]="deshabilitar"></app-formacionAcademica>
+              </div>
+          </div>
+          <div class="flex pt-4 justify-content-between">
+              <p-button 
+                  label="Back" 
+                  icon="pi pi-arrow-left" 
+                  [loading]="this.loading"
+                  (onClick)="prevCallback.emit()" />
+              <p-button 
+                  label="Next" 
+                  icon="pi pi-arrow-right" 
+                  iconPos="right" 
+                  [loading]="this.loading"
+                  (onClick)="siguiente(nextCallback, formacionAcademicaComponent)" />
+          </div>
+      </ng-template>
+  </p-stepperPanel>
+
+  <p-stepperPanel header="Experiencia">
+      <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+        <div class="flex flex-column">
+            <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                <app-experienciaLaboral [(ngModel)]="experienciaLaboral" #experienciaLaboralComponent
+                    ngClass="col-complete p-4" [submited]="submited" [disable]="deshabilitar"></app-experienciaLaboral>
+             </div>
+        </div>
+        <div class="flex pt-4 justify-content-between">
+            <p-button 
+                label="Back" 
+                icon="pi pi-arrow-left" 
+                [loading]="this.loading"
+                (onClick)="prevCallback.emit()" />
+            <p-button 
+                label="Next" 
+                icon="pi pi-arrow-right" 
+                iconPos="right" 
+                [loading]="this.loading"
+                (onClick)="siguiente(nextCallback, experienciaLaboralComponent)" />
+        </div>
+      </ng-template>
+  </p-stepperPanel>
+
+  <p-stepperPanel header="Conocimientos/Habilidades">
+    <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+      <div class="flex flex-column">
+          <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+              <app-habilidades [(ngModel)]="habilidades" #habilidadesComponent
+                  ngClass="col-complete p-4" [submited]="submited" [listaEtiquetas]="listaEtiquetas" [disable]="deshabilitar"></app-habilidades>
+           </div>
+      </div>
+      <div class="flex pt-4 justify-content-between">
+          <p-button 
+              label="Back" 
+              icon="pi pi-arrow-left" 
+              (onClick)="prevCallback.emit()" />
+          <p-button 
+              label="Next" 
+              icon="pi pi-arrow-right" 
+              iconPos="right" 
+              [loading]="this.loading"
+              (onClick)="siguiente(nextCallback, habilidadesComponent)" />
+      </div>
+    </ng-template>
+</p-stepperPanel>
+
+  <p-stepperPanel header="Condiciones">
+    <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+        <div class="flex flex-column">
+            <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto justify-content-center align-items-center font-medium">
+                <app-expectativaLaboral [(ngModel)]="expectativaLaboral" [submited]="submited" [disable]="deshabilitar"></app-expectativaLaboral>
+                <app-terminosCondiciones [(ngModel)]="terminosCondiciones" #terminosCondicionesComp
+                    ngClass="col-complete p-4" [submited]="submited" [disable]="deshabilitar"></app-terminosCondiciones>
+            </div>
+        </div>
+
+        <div class="flex pt-4 justify-content-between">
+            <p-button 
+                label="Back" 
+                icon="pi pi-arrow-left" 
+                [loading]="this.loading"
+                (onClick)="prevCallback.emit()" />
+            <p-button 
+                label="Finalizar" 
+                icon="pi pi-arrow-right" 
+                iconPos="right" 
+                [loading]="this.loading"
+                [disabled]="!getIsAprobadoGrabar()"
+                (onClick)="guardar()"
+                 />
+        </div>
+    </ng-template>
+    </p-stepperPanel>
+</p-stepper>
+
+<p-confirmDialog>
+    <ng-template pTemplate="message" let-message>
+        <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+            <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+            <p [innerHTML]="message.message" style="max-width: 300px;"></p>
+        </div>
+    </ng-template>
+  </p-confirmDialog>

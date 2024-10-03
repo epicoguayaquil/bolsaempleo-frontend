@@ -1,0 +1,23 @@
+
+<p-dropdown #select
+    [options]="listaItems"
+    [(ngModel)]="selectItem"
+    optionLabel="nombre"
+    [filter]="true"
+    filterBy="nombre" 
+    [showClear]="true"
+    [loading]="this.loading"
+    [style]="{'width': '100%'}"
+    [disabled]="isDisabled"
+    placeholder="Selecciona el tipo de emprendimiento">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption.nombre }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-tipo pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ tipo.nombre }}</div>
+            </div>
+        </ng-template>
+</p-dropdown>

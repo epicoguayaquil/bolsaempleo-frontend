@@ -1,0 +1,63 @@
+<form [formGroup]="formDatos" Class="col-complete">
+  <div class="align-items-center justify-content-center">
+    
+    <div class="grid">
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+        <p-table [value]="getListaTitulosAcademicos()" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="header">
+            <tr>
+              <th colspan="5">
+                <p-button (onClick)="agregarTitulo()" icon="pi pi-plus"></p-button>
+              </th>
+            </tr>
+            <tr>
+              <th>Titulo</th>
+              <th>Universidad</th>
+              <th>Fecha inicio</th>
+              <th>Fecha fin</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-titulo let-rowIndex="rowIndex">
+            <tr>
+              <td>
+                <input pInputText appUppercase formControlName="carrera_titulo{{titulo.index}}" class="col-complete"
+                  [ngClass]="{'ng-invalid': fieldIsValid('carrera_titulo'+titulo.index), 'ng-dirty': fieldIsValid('titulo'+titulo.index)}"
+                  [(ngModel)]="titulo.carrera_titulo"
+                  ngClass="col-complete" />
+                <app-formMensageError [control]="formDatos.controls['carrera_titulo'+titulo.index]" [submited]="submited"></app-formMensageError>
+              </td>
+              <td>
+                <input pInputText appUppercase formControlName="instituto{{titulo.index}}" class="col-complete"
+                  [ngClass]="{'ng-invalid': fieldIsValid('instituto'+titulo.index), 'ng-dirty': fieldIsValid('universidad'+titulo.index)}"
+                  [(ngModel)]="titulo.instituto"
+                  ngClass="col-complete" />
+                <app-formMensageError [control]="formDatos.controls['instituto'+titulo.index]" [submited]="submited"></app-formMensageError>
+              </td>
+              <td>
+                <p-inputMask mask="9999-99-99" placeholder="9999-12-31" formControlName="fechainicio{{titulo.index}}" slotChar="yyyy-mm-dd" 
+                  [ngClass]="{'ng-invalid': fieldIsValid('fechainicio'+titulo.index), 'ng-dirty': fieldIsValid('fechainicio'+titulo.index)}"
+                  [(ngModel)]="titulo.fecha_inicio"
+                  class="col-complete" styleClass="col-complete"/>
+                <app-formMensageError [control]="formDatos.controls['fechainicio'+titulo.index]" [submited]="submited"></app-formMensageError>
+              </td>
+              <td>
+                <p-inputSwitch formControlName="vigente{{titulo.index}}" [(ngModel)]="titulo.actualidad" inputId="switch1" (onChange)="vigente(titulo)" />
+                <label for="switch1">Estudias Actualmente</label>
+                <p-inputMask mask="9999-99-99" placeholder="9999-12-31" formControlName="fechafin{{titulo.index}}" slotChar="yyyy-mm-dd" 
+                  [ngClass]="{'ng-invalid': fieldIsValid('fechafin'+titulo.index), 'ng-dirty': fieldIsValid('fechafin'+titulo.index)}"
+                  [(ngModel)]="titulo.fecha_fin"
+                  class="col-complete" styleClass="col-complete"/>
+                <app-formMensageError [control]="formDatos.controls['fechafin'+titulo.index]" [submited]="submited"></app-formMensageError>
+              </td>
+              <td>
+                <p-button icon="pi pi-times" severity="danger" (onClick)="removerTitulo(titulo)" />
+              </td>
+            </tr>
+          </ng-template>
+      </p-table>
+      </div>
+    </div>
+
+  </div>
+</form>

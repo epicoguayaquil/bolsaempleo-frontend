@@ -1,0 +1,39 @@
+<!--div class="flex align-items-center align-items-stretch flex-wrap" style="min-height: 100vh">
+  <div class="flex align-items-center justify-content-center bg-primary font-bold border-round m-2" style="min-width: 200px; min-height: 50px">1</div>
+  <div class="flex align-items-center justify-content-center bg-primary font-bold border-round m-2" style="min-width: 200px; min-height: 50px">2</div>
+</div-->
+
+<div class="w-full flex justify-content-center align-items-end" style="min-height: 20vh">
+  <h1 class="text-900 text-white text-5xl text-center">SERVICIOS DE EPICO</h1>
+</div>
+
+<div class="flex justify-content-center align-items-center" style="min-height: 70vh">
+
+  <p-card header="BOLSA DE EMPLEO" [className]="'sm:col-6 md:col-3 lg:col-2 xl:col-2 border-round-top'" styleClass="custom-card h-22rem sm:h-22rem md:h-25rem lg:h-25rem lg:h-25rem xl:h-25rem">
+    <ng-template pTemplate="header">
+        <img alt="Card" [src]="getUlr('assets/images/bolsa_empleo.png')" />
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p-button label="Explorar" class="w-full" styleClass="w-full" [routerLink]="['ofertas']" />
+    </ng-template>
+  </p-card>
+
+  <p-card header="TALLERES Y EVENTOS" class="custom-card" [className]="'sm:col-6 md:col-3 lg:col-2 xl:col-2 border-round-top'" styleClass="custom-card h-22rem sm:h-22rem md:h-25rem lg:h-25rem lg:h-25rem xl:h-25rem">
+    <ng-template pTemplate="header">
+        <img alt="Card" [src]="getUlr('assets/images/eventos.png')" />
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p-button label="Explorar" class="w-full" styleClass="w-full" [routerLink]="['eventos']" />
+    </ng-template>
+  </p-card>
+
+  <p-card header="SERVICIOS" class="custom-card" [className]="'sm:col-6 md:col-3 lg:col-2 xl:col-2 border-round-top'" styleClass="custom-card h-22rem sm:h-22rem md:h-25rem lg:h-25rem lg:h-25rem xl:h-25rem">
+    <ng-template pTemplate="header">
+        <img alt="Card" [src]="getUlr('assets/images/eventos.png')" />
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p-button label="Explorar" class="w-full" styleClass="w-full" [routerLink]="['servicios']" />
+    </ng-template>
+  </p-card>
+
+</div>

@@ -1,0 +1,61 @@
+<form [formGroup]="formDatos" Class="col-complete">
+
+  <div class="align-items-center justify-content-center">
+    
+    <div class="grid">
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 flex justify-content-center">
+        <h3>FORMACIÓN ACADÉMICA</h3>
+      </div>
+  
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="id_situacion_laboral">Situación Laboral:</label>
+        <app-selectSituacionLaboral formControlName="id_situacion_laboral" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_situacion_laboral'), 'ng-dirty': fieldIsValid('id_situacion_laboral')}"></app-selectSituacionLaboral>
+        <app-formMensageError [control]="formDatos.controls['id_situacion_laboral']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="id_nivel_academico">Nivel Académico:</label>
+        <app-selectNivelAcademico formControlName="id_nivel_academico" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_nivel_academico'), 'ng-dirty': fieldIsValid('id_nivel_academico')}"></app-selectNivelAcademico>
+        <app-formMensageError [control]="formDatos.controls['id_nivel_academico']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="linkedin">Linkedin:</label>
+        <input pInputText id="linkedin" formControlName="linkedin" class="col-complete"
+              [ngClass]="{'ng-invalid': fieldIsValid('linkedin'), 'ng-dirty': fieldIsValid('linkedin')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['linkedin']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="file_cv">Hoja de vida:</label>
+        <p-inputGroup>
+          <button type="button" pButton icon="pi pi-trash" class="p-button-danger" (click)="cancelar()" *ngIf="viewcancelarFile"></button>
+          <p-fileUpload mode="basic" chooseIcon="pi pi-upload" name="demo[]" 
+            accept="application/pdf" maxFileSize="1000000" (onSelect)="onSelect($event)" fileLimit="1"
+            #fileCV chooseLabel="Cargar Hoja de Vida"/>
+        </p-inputGroup>
+        <a href="{{formDatos.controls['cv'].value}}">{{formDatos.controls['cv'].value}}</a>
+        <app-formMensageError [control]="formDatos.controls['file_cv']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+        <label for="descripcion_perfil">Breve descripción del perfil (Indicando principales competencias, capacidades, actitudes, intereses y motivaciones):</label>
+        <textarea rows="5" cols="30" pInputTextarea formControlName="descripcion_perfil" class="col-complete"
+          [ngClass]="{'ng-invalid': fieldIsValid('descripcion_perfil'), 'ng-dirty': fieldIsValid('descripcion_perfil')}"
+          ngClass="col-complete">
+        </textarea>
+        <app-formMensageError [control]="formDatos.controls['descripcion_perfil']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <app-titulosAcademicos formControlName="titulos_academicos" [submited]="submited" #titulosAcademicos></app-titulosAcademicos>
+
+    </div>
+  </div>
+
+</form>

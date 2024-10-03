@@ -1,0 +1,76 @@
+<app-bannerEventos *ngIf="mostrarCabecera"></app-bannerEventos>
+<div class="flex justify-content-center {{className}}" [style]="{'width': '100%'}">
+  <p-card  styleClass="border-1 border-round-xl surface-border" [ngStyle]="style">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-end flex-wrap">
+        <app-compartiRedesSociales [viewBtnPopup]="false" [path]="'servicio/index.php?id='+servicio?.id"></app-compartiRedesSociales>
+      </div>
+      <div class="flex justify-content-between flex-wrap">
+        <div class="grid">
+
+          <div class="sm:col-12 md:col-12 lg:col-12 xl:col-12 flex align-items-center justify-content-center font-bold border-round">
+            <img class="sm:w-4 lg:w-2" alt="Card" [src]="getLogo()" />
+          </div>
+
+          <div class="sm:col-12 text-center md:col-12 lg:col-12 xl:col-12 flex align-items-center font-bold border-round">
+            <div class="grid">
+              <div class="col-12"><h1 class="ml-3">{{servicio?.nombre}}</h1></div>
+              <div class="col-3">
+                <h1 class="ml-3"><i class="pi pi-calendar sm:text-5xl lg:text-7xl text-green-500"></i>
+                  {{servicio?.fecha_inicio}}
+                  <br> <span class="text-green-500">FECHA INICIO</span>
+                </h1>
+              </div>
+              <div class="col-3">
+                <h1 class="ml-3"><i class="pi pi-calendar sm:text-5xl lg:text-7xl text-green-500"></i>
+                  {{servicio?.fecha_fin}}
+                  <br> <span class="text-green-500">FECHA FIN</span>
+                </h1>
+              </div>
+              <div class="col-6">
+                <h1 class="ml-3"><i class="pi pi-clock sm:text-5xl lg:text-7xl text-green-500"></i>
+                  {{servicio?.fecha_ini_registro | date:'yyyy-MM-dd' }} <span class="text-green-500">AL </span>
+                  {{servicio?.fecha_fin_registro | date:'yyyy-MM-dd' }}
+                  <br> <span class="text-green-500">FECHA DE REGISTRO</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="flex justify-content-center">
+      <!--p-messages [(value)]="messages" [enableService]="false" *ngIf="this.servicio?.id_postulacion" /-->
+      <p-button label="INSCRÍBETE" (onClick)="registrarse()"></p-button>
+    </div>
+    <br>
+    <div class="grid">
+      <div class="sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <p-card header="DESCRIPCIÓN">
+          <p [innerHTML]="servicio?.descripcion_edi"></p>
+        </p-card>
+      </div>
+      <div class="sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <p-card header="ACTIVIDADES">
+          <p-timeline [value]="servicio?.programa?.programa_obligatorios"  styleClass="customized-timeline" align="alternate">
+            <ng-template pTemplate="marker" let-event>
+                <span 
+                    class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" 
+                    [style]="{ 'background-color': '#57B2D9' }">
+                        <i class="pi pi-check"></i>
+                </span>
+            </ng-template>
+            <ng-template pTemplate="content" let-event>
+              {{ event.nombre }}
+            </ng-template>
+          </p-timeline>
+        </p-card>
+      </div>
+    </div>
+
+    <app-compartiRedesSociales [viewBtnPopup]="false" [path]="'servicio/index.php?id='+servicio?.id"></app-compartiRedesSociales>
+
+  </p-card>
+</div>

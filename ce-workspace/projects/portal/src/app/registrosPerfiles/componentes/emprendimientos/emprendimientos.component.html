@@ -1,0 +1,32 @@
+
+<div class="flex mb-2 gap-2 justify-content-end">
+
+    <p-button *ngFor="let emprendimiento of emprendimientos; let i=index"
+        (click)="activeIndex = i" 
+        rounded="true" 
+        styleClass="w-2rem h-2rem p-0" 
+        [outlined]="activeIndex !== i" 
+        label="{{i+1}}" />
+    <p-button 
+        rounded="true" 
+        styleClass="w-2rem h-2rem p-0" 
+        icon="pi pi-plus"
+        
+        (click)="addEmprendimiento()"/>
+</div>
+
+<p-tabView [(activeIndex)]="activeIndex" [scrollable]="true" (onClose)="removeEmprendimiento($event)">
+    @for (emprendimiento of emprendimientos; let i=$index; track emprendimiento.index) {
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                    <span class="font-bold white-space-nowrap m-0">
+                        {{emprendimiento.nombre}}
+                    </span>
+                    <i class="pi pi-times" (click)="removeEmprendimiento(emprendimiento.index)"></i>
+                </div>
+            </ng-template>
+            <app-emprendimiento [(ngModel)]="emprendimientos[i]"></app-emprendimiento>
+        </p-tabPanel>
+    }
+</p-tabView>

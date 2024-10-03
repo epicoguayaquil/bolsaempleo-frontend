@@ -1,0 +1,16 @@
+<div class="grid grid-nogutter">
+  <ng-content></ng-content>
+  @for (grupo of listaItemsEstructurada; track grupo.nombre) {
+    <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3" *ngIf="visible">
+      <label for="birth_date">{{grupo.nombre}}</label>
+      <p-multiSelect  
+        [options]="grupo.lista" 
+        (ngModelChange)="registrarCambio()"
+        [(ngModel)]="grupo.listaSeleccionada" 
+        optionLabel="etiqueta" 
+        [style]="style"
+        class="col-12"
+        placeholder="SELECCIONA {{grupo.nombre}}" />
+    </div>
+  }
+</div>

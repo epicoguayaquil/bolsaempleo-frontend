@@ -1,0 +1,63 @@
+<app-bannerOfertasLaborales></app-bannerOfertasLaborales>
+
+<app-filtros 
+    [(ngModel)]="parametros" 
+    (search)="consultarPorFiltros()"
+    [options]="options" 
+    [loading]="loading"
+    className="btn-page" 
+    [style]="{'width': '100%'}" />
+
+<br>
+<div class="flex justify-content-center" [style]="{'width': '100%'}">
+  <p-fieldset legend="Ofertas Laborales" [toggleable]="true">
+      <div class="grid grid-nogutter">
+          <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8 lg:flex-order-1 xl:flex-order-1">
+              <app-ofertaLaboral [oferta]="oferta" [path]="path"></app-ofertaLaboral>
+          </div>
+
+          <div class="col-12 sm:col-12 md:col-12 lg:col-4 xl:col-4 lg:flex-order-0 xl:flex-order-0">
+              <p-dataView #dv 
+                [value]="ofertas_laborales" 
+                [layout]="layout" 
+                [rows]="rows"  
+                [paginator]="true" 
+                [totalRecords]="totalRecords" 
+                [loading]="loading"
+                [lazy]="true"
+                (onPage)="onPage($event)"
+                >
+                  
+                  <ng-template pTemplate="list" let-ofertas_laborales>
+                      <div class="grid grid-nogutter">
+                          <div class="col-12" *ngFor="let item of ofertas_laborales; let first = first" class="col-12">
+                              <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                                  <div class="xl:max-w-8rem relative">
+                                      <img class="block xl:block mx-auto border-round w-full" [src]="item.logo ? (path + item.logo) : logoDefault" [alt]="item.titulo" />
+                                  </div>
+                                  <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                                      <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                                          <div>
+                                              <span class="font-medium text-secondary text-sm">{{ item.titulo }}</span>
+                                              <div class="text-lg font-medium text-900 mt-1">{{ item.organizacion }}</div>
+                                              <p-badge *ngIf="item.id_postulacion" [value]="'postulado'" />
+                                          </div>
+                                      </div>
+                                      <div class="flex flex-column md:align-items-end gap-5">
+                                            <div class="flex flex-row-reverse md:flex-row gap-2">
+                                                <app-compartiRedesSociales [titulo]="tituloCompartir" [path]="'oferta/index.php?id='+item?.id"></app-compartiRedesSociales>
+                                                <p-button icon="pi pi-eye" class="flex-auto sm:flex-initial white-space-nowrap" size="small" label="Ver" (onClick)="selectOferta(item)"/>
+                                            </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </ng-template>
+              </p-dataView>
+          </div>
+          
+      </div>
+  </p-fieldset>
+</div>
+<br>

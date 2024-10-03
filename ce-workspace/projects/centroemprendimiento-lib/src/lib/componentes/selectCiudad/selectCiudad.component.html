@@ -1,0 +1,33 @@
+<!--p-autoComplete 
+    *ngIf="searchOnlyByCountry"
+    [(ngModel)]="selectItem" 
+    [suggestions]="listaItems" 
+    [disabled]="isDisabled"
+    (completeMethod)="filterCity($event)" 
+    minLength="3"
+    [ngStyle]="{'width': '100%'}"
+    [style]="{'width': '100%'}"
+    field="nombre" /-->
+
+<p-dropdown #select
+    [options]="listaItems"
+    [(ngModel)]="selectItem"
+    optionLabel="nombre"
+    [filter]="true"
+    filterBy="nombre" 
+    [showClear]="true"
+    [loading]="loading"
+    [disabled]="isDisabled"
+    [style]="{'width': '100%'}"
+    placeholder="Selecciona la ciudad">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption.nombre }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-ciudad pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ ciudad.nombre }}</div>
+            </div>
+        </ng-template>
+</p-dropdown>

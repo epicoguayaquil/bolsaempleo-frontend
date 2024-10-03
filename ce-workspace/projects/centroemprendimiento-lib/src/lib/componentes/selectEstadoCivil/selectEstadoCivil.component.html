@@ -1,0 +1,23 @@
+
+<p-dropdown #select
+    [options]="listaItems"
+    [(ngModel)]="selectItem"
+    optionLabel="nombre"
+    [filter]="true"
+    filterBy="nombre" 
+    [showClear]="true"
+    [loading]="this.loading"
+    [disabled]="isDisabled"
+    [style]="{'width': '100%'}"
+    placeholder="Selecciona el estado civil">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption.nombre }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-genero pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ genero.nombre }}</div>
+            </div>
+        </ng-template>
+</p-dropdown>

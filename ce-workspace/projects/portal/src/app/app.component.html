@@ -1,0 +1,10 @@
+<ng-container *ngIf="showLoginComponent">
+  <app-loginModal></app-loginModal>
+</ng-container>
+<p-toast
+[showTransformOptions]="'translateY(100%)'" 
+    [showTransitionOptions]="'1000ms'" 
+    [hideTransitionOptions]="'1000ms'" 
+    [showTransformOptions]="'translateX(100%)'"
+    [life]="7000" />
+<router-outlet></router-outlet>

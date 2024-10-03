@@ -1,0 +1,512 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "centroemprendimiento-lib": {
+      "projectType": "library",
+      "root": "projects/centroemprendimiento-lib",
+      "sourceRoot": "projects/centroemprendimiento-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/centroemprendimiento-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/centroemprendimiento-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/centroemprendimiento-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/centroemprendimiento-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "portal": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/portal",
+      "sourceRoot": "projects/portal/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/portal",
+            "index": "projects/portal/src/index.html",
+            "main": "projects/portal/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/portal/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/portal/public"
+              },
+              "projects/portal/src/favicon.ico",
+              "projects/portal/src/assets"
+            ],
+            "styles": [
+              "projects/portal/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/environments/environment.ts",
+                "with": "projects/environments/environment.prod.ts"
+              }],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "portal:build:production"
+            },
+            "development": {
+              "buildTarget": "portal:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/portal/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/portal/public"
+              }
+            ],
+            "styles": [
+              "projects/portal/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "centro-emprendimiento": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/centro-emprendimiento",
+      "sourceRoot": "projects/centro-emprendimiento/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/centro-emprendimiento",
+            "index": "projects/centro-emprendimiento/src/index.html",
+            "browser": "projects/centro-emprendimiento/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/centro-emprendimiento/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/centro-emprendimiento/public"
+              },
+              "projects/centro-emprendimiento/src/favicon.ico",
+              "projects/centro-emprendimiento/src/assets"
+            ],
+            "styles": [
+              "projects/centro-emprendimiento/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/environments/environment.ts",
+                "with": "projects/environments/environment.prod.ts"
+              }],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "centro-emprendimiento:build:production"
+            },
+            "development": {
+              "buildTarget": "centro-emprendimiento:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/centro-emprendimiento/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/centro-emprendimiento/public"
+              }
+            ],
+            "styles": [
+              "projects/centro-emprendimiento/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "BO-mnt-catalogos": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/bo-mnt-catalogos",
+      "sourceRoot": "projects/bo-mnt-catalogos/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/bo-mnt-catalogos",
+            "index": "projects/bo-mnt-catalogos/src/index.html",
+            "browser": "projects/bo-mnt-catalogos/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/bo-mnt-catalogos/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/bo-mnt-catalogos/public"
+              }
+            ],
+            "styles": [
+              "projects/bo-mnt-catalogos/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/environments/environment.ts",
+                "with": "projects/environments/environment.prod.ts"
+              }],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "BO-mnt-catalogos:build:production"
+            },
+            "development": {
+              "buildTarget": "BO-mnt-catalogos:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/bo-mnt-catalogos/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/bo-mnt-catalogos/public"
+              }
+            ],
+            "styles": [
+              "projects/bo-mnt-catalogos/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "BO-srv-centroemprendimiento": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/bo-srv-centroemprendimiento",
+      "sourceRoot": "projects/bo-srv-centroemprendimiento/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/bo-srv-centroemprendimiento",
+            "index": "projects/bo-srv-centroemprendimiento/src/index.html",
+            "browser": "projects/bo-srv-centroemprendimiento/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/bo-srv-centroemprendimiento/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/bo-srv-centroemprendimiento/public"
+              }
+            ],
+            "styles": [
+              "projects/bo-srv-centroemprendimiento/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/environments/environment.ts",
+                "with": "projects/environments/environment.prod.ts"
+              }],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "BO-srv-centroemprendimiento:build:production"
+            },
+            "development": {
+              "buildTarget": "BO-srv-centroemprendimiento:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/bo-srv-centroemprendimiento/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/bo-srv-centroemprendimiento/public"
+              }
+            ],
+            "styles": [
+              "projects/bo-srv-centroemprendimiento/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "BO-srv-empleo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/bo-srv-empleo",
+      "sourceRoot": "projects/bo-srv-empleo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/bo-srv-empleo",
+            "index": "projects/bo-srv-empleo/src/index.html",
+            "browser": "projects/bo-srv-empleo/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/bo-srv-empleo/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/bo-srv-empleo/public"
+              }
+            ],
+            "styles": [
+              "projects/bo-srv-empleo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/environments/environment.ts",
+                "with": "projects/environments/environment.prod.ts"
+              }],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "BO-srv-empleo:build:production"
+            },
+            "development": {
+              "buildTarget": "BO-srv-empleo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/bo-srv-empleo/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/bo-srv-empleo/public"
+              }
+            ],
+            "styles": [
+              "projects/bo-srv-empleo/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

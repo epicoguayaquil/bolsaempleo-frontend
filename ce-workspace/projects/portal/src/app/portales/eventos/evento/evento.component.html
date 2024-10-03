@@ -1,0 +1,160 @@
+<app-bannerEventos *ngIf="mostrarCabecera"></app-bannerEventos>
+
+<div class="flex justify-content-center {{className}}" [style]="{'width': '100%'}" *ngIf="!evento">
+  <p-card  styleClass="border-1 border-round-xl surface-border" [ngStyle]="style">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-end flex-wrap">
+        <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px" />
+      </div>
+      <div class="flex justify-content-between flex-wrap">
+        <div class="grid w-full">
+
+          <div class="sm:col-12 md:col-12 lg:col-12 xl:col-12 flex align-items-center justify-content-center font-bold border-round">
+            <p-skeleton shape="circle" size="4rem" styleClass="mr-2 " />
+          </div>
+
+          <div class="sm:col-12 text-center md:col-12 lg:col-12 xl:col-12 flex align-items-center font-bold border-round">
+            <div class="grid w-full">
+              <div class="col-12">
+                <p-skeleton width="100%" height="50px" />
+              </div>
+              <div class="col-4">
+                <h1 class="ml-3"><i class="pi pi-calendar sm:text-5xl lg:text-7xl text-green-500"></i>
+                  <p-skeleton width="100%" height="4rem" />
+                  <br> <span class="text-green-500">FECHA INICIO</span>
+                </h1>
+              </div>
+              <div class="col-4">
+                <h1 class="ml-3"><i class="pi pi-calendar sm:text-5xl lg:text-7xl text-green-500"></i>
+                  <p-skeleton width="100%" height="4rem" />
+                  <br> <span class="text-green-500">FECHA FIN</span>
+                </h1>
+              </div>
+              <div class="col-4">
+                <h1 class="ml-3"><i class="pi pi-clock sm:text-5xl lg:text-7xl text-green-500"></i>
+                  <p-skeleton width="100%" height="4rem" />
+                  <br> <span class="text-green-500">HORA</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="flex justify-content-center">
+      <p-skeleton width="50%" height="4rem" />
+    </div>
+
+    <p-skeleton width="100%" height="150px" />
+    <br>
+    <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px" />
+
+  </p-card>
+</div>
+
+<div class="flex justify-content-center {{className}}" [style]="{'width': '100%'}" *ngIf="evento">
+  <p-card  styleClass="border-1 border-round-xl surface-border" [ngStyle]="style">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-end flex-wrap">
+        <app-compartiRedesSociales [viewBtnPopup]="false" [path]="'evento/index.php?id='+evento.id"></app-compartiRedesSociales>
+      </div>
+      <div class="flex justify-content-between flex-wrap">
+        <div class="grid">
+
+          <div class="sm:col-12 md:col-12 lg:col-12 xl:col-12 flex align-items-center justify-content-center font-bold border-round">
+            <img class="sm:w-4 lg:w-2" alt="Card" [src]="getLogo()" />
+          </div>
+
+          <div class="sm:col-12 text-center md:col-12 lg:col-12 xl:col-12 flex align-items-center font-bold border-round">
+            <div class="grid">
+              <div class="col-12"><h1 class="ml-3">{{evento.nombre}}</h1></div>
+              <div class="col-4">
+                <h1 class="ml-3"><i class="pi pi-calendar sm:text-5xl lg:text-7xl text-green-500"></i>
+                  {{evento.fecha}}
+                  <br> <span class="text-green-500">FECHA INICIO</span>
+                </h1>
+              </div>
+              <div class="col-4">
+                <h1 class="ml-3"><i class="pi pi-calendar sm:text-5xl lg:text-7xl text-green-500"></i>
+                  {{evento.fecha_fin}}
+                  <br> <span class="text-green-500">FECHA FIN</span>
+                </h1>
+              </div>
+              <div class="col-4">
+                <h1 class="ml-3"><i class="pi pi-clock sm:text-5xl lg:text-7xl text-green-500"></i>{{evento.hora_inicio}}-{{evento.hora_fin}}
+                  <br> <span class="text-green-500">HORA</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="flex justify-content-center">
+      <p-messages [(value)]="messages" [enableService]="false" *ngIf="this.evento?.id_postulacion" />
+      <p-button *ngIf="!this.evento?.id_postulacion" label="INSCRÍBETE" (onClick)="registrarse()" [loading]="this.loading"></p-button>
+    </div>
+
+    <p [innerHTML]="evento.contenido"></p>
+
+    <app-compartiRedesSociales [viewBtnPopup]="false" [path]="'evento/index.php?id='+evento.id"></app-compartiRedesSociales>
+
+  </p-card>
+</div>
+
+<p-confirmDialog #cd>
+  <ng-template pTemplate="headless" let-message>
+      <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+          <div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem">
+              <i class="pi pi-question text-5xl"></i>
+          </div>
+          <span class="font-bold text-2xl block mb-2 mt-4">
+            {{ message.header }}
+          </span>
+          <p class="mb-0">{{ message.message }}</p>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex align-items-center">
+                <p-radioButton 
+                    name="PRESENCIAL" 
+                    value="1" 
+                    [(ngModel)]="id_tipo_asistencia" 
+                    inputId="id_tipo_asistencia1" />
+                <label for="id_tipo_asistencia1" class="ml-2">
+                  PRESENCIAL
+                </label>
+            </div>
+            
+            <div class="flex align-items-center">
+                <p-radioButton 
+                    name="ONLINE" 
+                    value="2" 
+                    [(ngModel)]="id_tipo_asistencia" 
+                    inputId="id_tipo_asistencia2" />
+                <label for="id_tipo_asistencia2" class="ml-2">
+                  ONLINE
+                </label>
+            </div>
+          </div>
+          <div class="flex align-items-center gap-2 mt-4">
+              <button 
+                  pButton 
+                  label="Save" 
+                  (click)="aceptarModalidad()" 
+                  [loading]="loading"
+                  class="w-8rem">
+              </button>
+              <button 
+                  pButton 
+                  label="Cancel" 
+                  (click)="cd.reject()" 
+                  [loading]="loading"
+                  class="p-button-outlined w-8rem ">
+              </button>
+          </div>
+      </div>
+  </ng-template>
+</p-confirmDialog>

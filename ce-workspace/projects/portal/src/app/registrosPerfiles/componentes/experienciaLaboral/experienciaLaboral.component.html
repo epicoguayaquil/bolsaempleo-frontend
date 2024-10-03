@@ -1,0 +1,46 @@
+<form [formGroup]="formDatos" Class="col-complete">
+
+  <div class="flex align-items-center justify-content-center">
+    
+    <div class="grid">
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 flex justify-content-center">
+        <h3>EXPERIENCIA LABORAL</h3>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex justify-content-center pading-check">
+        <p-inputSwitch formControlName="has_experiencia" 
+          (onChange)="resetValidadorExperiencia()"
+          [ngClass]="{'ng-invalid': fieldIsValid('has_experiencia'), 'ng-dirty': fieldIsValid('has_experiencia')}"/>
+        <label for="has_experiencia">¿Tienes experiencia?</label>
+        <app-formMensageError [control]="formDatos.controls['has_experiencia']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex justify-content-center pading-check">
+        <p-inputSwitch formControlName="is_trabajando" 
+          [ngClass]="{'ng-invalid': fieldIsValid('is_trabajando'), 'ng-dirty': fieldIsValid('is_trabajando')}"/>
+        <label for="is_trabajando">¿Trabajas Actualmente?</label>
+        <app-formMensageError [control]="formDatos.controls['is_trabajando']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6" *ngIf="formDatos.controls['has_experiencia'].value || formDatos.controls['is_trabajando'].value">
+        <label for="organizacion">Empresa en la que has trabajado o trabajas actualmente</label>
+        <input pInputText id="organizacion" formControlName="organizacion" class="col-complete"
+              [ngClass]="{'ng-invalid': fieldIsValid('organizacion'), 'ng-dirty': fieldIsValid('organizacion')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['organizacion']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6" *ngIf="formDatos.controls['has_experiencia'].value || formDatos.controls['is_trabajando'].value">
+        <label for="cargo">Nombre del cargo que desempeñaste</label>
+        <input pInputText id="cargo" formControlName="cargo" class="col-complete"
+              [ngClass]="{'ng-invalid': fieldIsValid('cargo'), 'ng-dirty': fieldIsValid('cargo')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['cargo']" [submited]="submited"></app-formMensageError>
+      </div>
+
+    </div>
+
+  </div>
+
+</form>

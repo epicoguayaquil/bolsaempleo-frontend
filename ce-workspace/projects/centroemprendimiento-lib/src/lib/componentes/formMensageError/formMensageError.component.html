@@ -1,0 +1,21 @@
+
+<ng-container *ngIf="mostrarError() && control && control.errors">
+  <p-tag *ngIf="control.errors['required']" severity="danger" value="Este campo es requerido"/>
+  <p-tag *ngIf="control.errors['max']" severity="danger" value="El valor máximo {{control.errors['max']['max']}}"/>
+  <p-tag *ngIf="control.errors['min']" severity="danger" value="El valor mínimo {{control.errors['min']['min']}}"/>
+  <p-tag *ngIf="control.errors['minlength']" severity="danger" value="Debe tener una longitud mínima de {{control.errors['minlength']['requiredLength']}}"/>
+  <p-tag *ngIf="control.errors['maxlength']" severity="danger" value="Debe tener una longitud máxima de {{control.errors['maxlength']['requiredLength']}}"/>
+  <p-tag *ngIf="control.errors['cedula']" severity="danger" value="El número de cedula no es valido"/>
+  <p-tag *ngIf="control.errors['ruc']" severity="danger" value="El RUC no es valido"/>
+  <p-tag *ngIf="control.errors['hoja_vida']" severity="danger" value="La hoja de vida es obligatoria"/>
+  <!--small *ngIf="control.errors['required']" class="mensajeError">Este campo es requerido</small>
+  <small *ngIf="control.errors['max']">El valor máximo {{control.errors["max"]["max"]}}</small>
+  <small *ngIf="control.errors['min']">El valor mínimo {{control.errors["min"]["min"]}}</small>
+  <small *ngIf="control.errors['minlength']">Debe tener una longitud mínima de {{control.errors["minlength"]["requiredLength"]}}</small>
+  <small *ngIf="control.errors['maxlength']">Debe tener una longitud máxima de {{control.errors["maxlength"]["requiredLength"]}}</small-->
+</ng-container>
+
+<!--p-messages [value]="getMensajes()" 
+  [enableService]="false" 
+  [showTransitionOptions]="'500ms'" 
+  [hideTransitionOptions]="'500ms'"  /-->

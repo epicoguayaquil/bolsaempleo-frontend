@@ -1,0 +1,37 @@
+<app-bannerOfertasLaborales *ngIf="mostrarCabecera"></app-bannerOfertasLaborales>
+<div class="flex justify-content-center {{className}}" [style]="{'width': '100%'}">
+  <p-card  styleClass="border-1 border-round-xl surface-border" [ngStyle]="style">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-end flex-wrap">
+        <app-compartiRedesSociales [viewBtnPopup]="false" [path]="'oferta/index.php?id='+this.oferta?.id"></app-compartiRedesSociales>
+      </div>
+      <div class="flex justify-content-between flex-wrap">
+        <div class="flex align-items-center w-8 font-bold border-round">
+          <h1 class="ml-3">{{oferta?.titulo}}</h1>
+        </div>
+        <div class="flex align-items-center justify-content-center w-3 font-bold border-round">
+            <img alt="Card" [src]="getLogo()" />
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="flex justify-content-center">
+      <p-messages [(value)]="messages" [enableService]="false" *ngIf="this.oferta?.id_postulacion" />
+      <p-button *ngIf="!this.oferta?.id_postulacion" label="POSTULATE" (onClick)="postular()" [loading]="this.loading"></p-button>
+    </div>
+
+    <p [innerHTML]="oferta?.detalle"></p>
+
+    <app-compartiRedesSociales [viewBtnPopup]="false" [path]="'oferta/index.php?id='+this.oferta?.id"></app-compartiRedesSociales>
+
+  </p-card>
+</div>
+
+<p-confirmDialog *ngIf="visibleMensaje">
+  <ng-template pTemplate="message" let-message>
+      <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+          <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+          <p [innerHTML]="message.message" style="max-width: 300px;"></p>
+      </div>
+  </ng-template>
+</p-confirmDialog>

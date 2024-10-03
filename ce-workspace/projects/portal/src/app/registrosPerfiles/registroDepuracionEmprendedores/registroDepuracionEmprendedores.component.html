@@ -1,0 +1,75 @@
+
+<div class="grid">
+
+    <div class="col-12 sm:col-12 md:col-8 lg:col-8 xl:col-8 flex justify-content-center 
+        md:col-offset-2 lg:col-offset-2 xl:col-offset-2">
+        <p-card header="REGÍSTRATE" subheader="Registra tus datos para mantenerte informado sobre próximos eventos, becas y programas que ofreceremos en el futuro">
+            <p-stepper>
+                <p-stepperPanel header="Datos Personales">
+                    <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+                        <div class="flex flex-column">
+                            <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                                <app-datosPersonales [(ngModel)]="datosPersonales" #datosPersonalesComponent
+                                ngClass="col-complete p-4" [submited]="submited" (consultarCedula)="identificadorCambios()"
+                                [loading]="loading" [disable]="deshabilitarDatosPersonales" [fieldsToDisable]="fieldsToDisableDatosPersonales"></app-datosPersonales>
+                            </div>
+                        </div>
+                        <div class="flex pt-4 justify-content-end">
+                            <p-button 
+                                label="Next" 
+                                icon="pi pi-arrow-right" 
+                                iconPos="right" 
+                                (onClick)="siguiente(nextCallback, datosPersonalesComponent)" />
+                        </div>
+                    </ng-template>
+                </p-stepperPanel>
+
+                <p-stepperPanel header="Emprendimientos">
+                    <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                        <div class="flex flex-column">
+                            <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                                <app-emprendimientos [(ngModel)]="emprendimientos" #experienciaLaboralComponent
+                                    ngClass="col-complete p-4" [submited]="submited" [disable]="deshabilitar"></app-emprendimientos>
+                            </div>
+                        </div>
+                        <div class="flex pt-4 justify-content-between">
+                            <p-button 
+                                label="Back" 
+                                icon="pi pi-arrow-left" 
+                                (onClick)="prevCallback.emit()" />
+                            <p-button 
+                                label="Next" 
+                                icon="pi pi-arrow-right" 
+                                iconPos="right" 
+                                (onClick)="siguiente(nextCallback, experienciaLaboralComponent)" />
+                        </div>
+                    </ng-template>
+                </p-stepperPanel>
+
+                <p-stepperPanel header="Condiciones">
+                    <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+                        <div class="flex flex-column">
+                            <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto justify-content-center align-items-center font-medium">
+                                <app-terminosCondiciones [(ngModel)]="terminosCondiciones"
+                                    ngClass="col-complete p-4" [submited]="submited" [disable]="deshabilitar"></app-terminosCondiciones>
+                            </div>
+                        </div>
+
+                        <div class="flex pt-4 justify-content-between">
+                            <p-button 
+                                label="Back" 
+                                icon="pi pi-arrow-left" 
+                                (onClick)="prevCallback.emit()" />
+                            <p-button 
+                                label="Finalizar" 
+                                icon="pi pi-arrow-right" 
+                                iconPos="right" 
+                                (onClick)="guardar()"
+                                />
+                        </div>
+                    </ng-template>
+                </p-stepperPanel>
+            </p-stepper>
+        </p-card>
+    </div>
+</div>

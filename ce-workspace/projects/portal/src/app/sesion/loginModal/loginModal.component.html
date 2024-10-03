@@ -1,0 +1,86 @@
+<!--p-button icon="pi pi-align-justify" size="large" severity="secondary" styleClass="btn-white boton-fijo"
+  (click)="showDialog()"></p-button-->
+  <div class="flex justify-content-end">
+    <p-avatar icon="pi pi-user" styleClass="mr-2 boton-fijo" size="xlarge" 
+    (click)="showDialog()" shape="circle" *ngIf="!loggedIn"></p-avatar>
+  
+    <p-avatar 
+      [image]="getFoto()" 
+      (onImageError)="onImageError($event)"
+      styleClass="mr-2 boton-fijo" 
+      size="xlarge" 
+      (click)="menu.toggle($event)"
+      shape="circle" *ngIf="loggedIn && this.pathUrlArchivo" />
+
+    <p-menu #menu [model]="items" [popup]="true">
+      <ng-template pTemplate="start">
+        <span class="inline-flex align-items-center gap-1 px-2 py-2">
+          <p-image src="{{urlLogo}}" alt="Image" [ngClass]="'w-full'" [styleClass]="'w-full'" width="100%" />
+            <span class="font-medium text-xl font-semibold">
+                PORTAL<span class="text-primary">EPICO</span>
+            </span>
+        </span>
+      </ng-template>
+      <ng-template pTemplate="submenuheader" let-item>
+          <span class="text-primary font-bold">{{ item.label }}</span>
+      </ng-template>
+      <ng-template pTemplate="item" let-item>
+          <a pRipple class="flex align-items-center p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+              <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+              <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
+                  {{ item.shortcut }}
+              </span>
+          </a>
+      </ng-template>
+      <ng-template pTemplate="end">
+          <button pRipple class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround">
+              <p-avatar 
+                [image]="getFoto()" 
+                (onImageError)="onImageError($event)" 
+                class="mr-2" shape="circle" />
+              <span class="inline-flex flex-column">
+                  <span class="font-bold">{{usuario?.nombre}}</span>
+                  <!--span class="text-sm">Admin</span-->
+              </span>
+          </button>
+      </ng-template>
+    </p-menu>
+    
+  </div>
+
+  <p-dialog header="Login" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <form [formGroup]="formDatos" autocomplete="off">
+      <div class="flex align-items-center gap-3 mb-3">
+          <label for="usuario" class="font-semibold w-6rem">Usuario</label>
+          <input pInputText id="usuario" class="flex-auto" autocomplete="off" formControlName="usuario"
+            [ngClass]="{'ng-invalid': fieldIsValid('usuario'), 'ng-dirty': fieldIsValid('usuario')}" />
+      </div>
+      <div class="flex align-items-center gap-3 mb-3" *ngIf="formDatos.controls['usuario'].errors">
+        <app-formMensageError [control]="formDatos.controls['usuario']" [submited]="submited"></app-formMensageError>
+      </div>
+      <div class="flex align-items-center gap-3 mb-5">
+          <label for="password" class="font-semibold w-6rem">Contraseña</label>
+          <p-password formControlName="password" [feedback]="false"
+            class="flex-auto"
+            [ngClass]="{'ng-invalid': fieldIsValid('password'), 'ng-dirty': fieldIsValid('password')}" />
+          
+      </div>
+      <div class="flex align-items-center gap-3 mb-3" *ngIf="formDatos.controls['password'].errors">
+        <app-formMensageError [control]="formDatos.controls['password']" [submited]="submited"></app-formMensageError>
+      </div>
+      <div class="flex justify-content-end gap-2">
+          <p-button label="Regístrate" severity="secondary" [loading]="loading" (click)="registrarme()" />
+          <p-button label="Iniciar Sesión" (click)="iniciarSesion()" [loading]="loading" />
+      </div>
+    </form>
+  </p-dialog>
+
+  <ng-container *ngIf="getTipoRegistro('PERSONA')">
+    <app-registroPersonaModal [visible]="vistaRegistro" (registrado)="registrado($event)"></app-registroPersonaModal>
+  </ng-container>
+
+  <ng-container *ngIf="getTipoRegistro('POSTULANTE')">
+    <app-registroPostulanteModal [visible]="vistaRegistro" (registrado)="registrado($event)" (cancelar)="cancelarRegistro($event)"></app-registroPostulanteModal>
+  </ng-container>

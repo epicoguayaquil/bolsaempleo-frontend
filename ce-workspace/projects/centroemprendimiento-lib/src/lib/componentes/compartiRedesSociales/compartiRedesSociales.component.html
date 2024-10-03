@@ -1,0 +1,33 @@
+<p-button icon="pi pi-share-alt" size="small" [outlined]="true" (onClick)="compartir($event)" *ngIf="viewBtnPopup" />
+<p-overlayPanel #opCompartir *ngIf="viewBtnPopup">
+  <div class="flex flex-column gap-3 w-25rem">
+      <div>
+          <span class="font-medium text-900 block mb-2">{{titulo}}</span>
+          <p-inputGroup>
+              <input pInputText value="{{getUrl()}}" readonly class="w-25rem" />
+              <p-inputGroupAddon (click)="copiar()">
+                  <i class="pi pi-copy"></i>
+              </p-inputGroupAddon>
+          </p-inputGroup>
+      </div>
+      <div class="flex justify-content-center">
+          <p-buttonGroup>
+            <p-button icon="pi pi-facebook" [raised]="true" [text]="true" (onClick)="comparirEnRedSocial('FACEBOOK')"/>
+            <p-button icon="pi pi-whatsapp" [raised]="true" [text]="true" severity="success" (onClick)="comparirEnRedSocial('WHATSAPP')"/>
+            <!--p-button icon="pi pi-instagram" [raised]="true" [text]="true" severity="danger" (onClick)="comparirEnRedSocial('INSTAGRAM')"/-->
+            <p-button icon="pi pi-twitter" [raised]="true" [text]="true" (onClick)="comparirEnRedSocial('TWITTER')"/>
+            <p-button icon="pi pi-plus-circle" [raised]="true" [text]="true" (onClick)="shareMore()" *ngIf="visibleMore()"/>
+          </p-buttonGroup>
+      </div>
+  </div>
+</p-overlayPanel>
+
+<div class="flex justify-content-center" *ngIf="!viewBtnPopup">
+  <p-buttonGroup [ngStyle]="{'border-primary': true}">
+      <p-button icon="pi pi-facebook" [raised]="true" [text]="true" (onClick)="comparirEnRedSocial('FACEBOOK')"/>
+      <p-button icon="pi pi-whatsapp" [raised]="true" [text]="true" severity="success" (onClick)="comparirEnRedSocial('WHATSAPP')"/>
+      <!--p-button icon="pi pi-instagram" [raised]="true" [text]="true" severity="danger" (onClick)="comparirEnRedSocial('INSTAGRAM')"/-->
+      <p-button icon="pi pi-twitter" [raised]="true" [text]="true" (onClick)="comparirEnRedSocial('TWITTER')"/>
+      <p-button icon="pi pi-plus-circle" [raised]="true" [text]="true" (onClick)="shareMore()" *ngIf="visibleMore()"/>
+  </p-buttonGroup>
+</div>

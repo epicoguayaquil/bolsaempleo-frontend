@@ -1,0 +1,65 @@
+<p-dataView #dv 
+    [value]="listaservicios" 
+    [rows]="rows"  
+    [paginator]="true" 
+    [totalRecords]="totalRecords" 
+    [loading]="loading"
+    [lazy]="true"
+    (onPage)="onPage($event)"
+    [layout]="layout">
+  <ng-template pTemplate="grid" let-servicios>
+      <div class="grid grid-nogutter">
+          <div class="col-12 sm:col-6 md:col-4 xl:col-3 p-2" *ngFor="let servicio of servicios">
+              <div class="p-4 border-1 surface-border surface-card border-round flex flex-column" style="min-height: 480px;">
+                  <div class="surface-50 flex justify-content-center border-round p-3">
+                      <div class="relative mx-auto">
+                          <img class="border-round w-full" [src]="getImageEvento(servicio)" (error)="setDefaultImage($event)" [alt]="servicio.nombre" style="max-width: 300px; max-height: 180px;" />
+                          <p-tag [value]="servicio.fecha" [severity]="getSeverity(servicio)" class="absolute" [style.left.px]="4" [style.top.px]="4" />
+                      </div>
+                  </div>
+                  <div class="pt-4">
+                      <div class="flex flex-row justify-content-between align-items-start gap-2">
+                          <div>
+                              <span class="font-medium text-secondary text-sm">{{ servicio.tipo_evento }}</span>
+                              <div class="text-lg font-medium text-900 mt-1">{{ servicio.nombre }}</div>
+                          </div>
+                      </div>
+                      <div class="flex flex-column gap-4 mt-4">
+                          <span class="text-2xl font-semibold">{{ servicio.fecha}} {{servicio.hora_inicio ? servicio.hora_inicio : ''}}</span>
+                          <div class="flex gap-2">
+                            <p-button icon="pi pi-eye" class="flex-auto md:flex-initial white-space-nowrap" label="Detalle" (click)="verServicio(servicio)" />
+                            <app-compartiRedesSociales [titulo]="servicio.nombre" [path]="'servicio/index.php?id='+servicio?.id"></app-compartiRedesSociales>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-12 sm:col-6 md:col-4 xl:col-3 p-2">
+            <div class="p-4 border-1 surface-border surface-card border-round flex flex-column" style="min-height: 480px;">
+                <div class="surface-50 flex justify-content-center border-round p-3">
+                    <div class="relative mx-auto">
+                        <img class="border-round w-full" src="assets/images/eventos.png" alt="TALLERES Y EVENTOS" style="max-width: 300px; max-height: 180px;" />
+                        <p-tag [value]="mesNombreSeleccionado" [severity]="'success'" class="absolute" [style.left.px]="4" [style.top.px]="4" />
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <div class="flex flex-row justify-content-between align-items-start gap-2">
+                        <div>
+                            <span class="font-medium text-secondary text-sm">TALLERES Y EVENTOS</span>
+                            <div class="text-lg font-medium text-900 mt-1">TALLERES Y EVENTOS</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-column gap-4 mt-4">
+                        <span class="text-2xl font-semibold">{{ mesNombreSeleccionado}}</span>
+                        <div class="flex gap-2">
+                        <p-button icon="pi pi-eye" class="flex-auto md:flex-initial white-space-nowrap" label="Detalle" [routerLink]="['../eventos']" />
+                        <app-compartiRedesSociales titulo="TALLERES Y EVENTOS" [path]="'eventos/'"></app-compartiRedesSociales>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </ng-template>
+</p-dataView>

@@ -1,0 +1,35 @@
+<form [formGroup]="formDatos" Class="col-complete">
+
+  <div class="flex align-items-center justify-content-center">
+    
+    <div class="grid">
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 flex justify-content-center">
+        <h3>EXPECTATIVA LABORAL</h3>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="id_provincia">Rango Salarial:</label>
+        <app-selectRangoSalarial formControlName="id_rango_salarial" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_rango_salarial'), 'ng-dirty': fieldIsValid('id_rango_salarial')}">
+        </app-selectRangoSalarial>
+        <app-formMensageError [control]="formDatos.controls['id_rango_salarial']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="id_provincia">Modalidad de preferencia:</label>
+        <app-selectModalidad formControlName="id_modalidad" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_modalidad'), 'ng-dirty': fieldIsValid('id_modalidad')}">
+        </app-selectModalidad>
+        <app-formMensageError [control]="formDatos.controls['id_modalidad']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+        <label for="id_provincia">Comentanos alguna información adicional que creas que necesitamos saber, como problemas en el horario de trabajo, alguna enfermedad, etc</label>
+        <textarea rows="5" cols="30" pInputTextarea formControlName="observacion" [style]="'width:100%'"></textarea>
+      </div>
+    </div>
+  </div>
+</form>

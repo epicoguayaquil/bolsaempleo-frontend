@@ -1,0 +1,47 @@
+<app-bannerEventos></app-bannerEventos>
+
+<app-filtros 
+    [(ngModel)]="parametros" 
+    [loading]="loading" 
+    (search)="buscar($event)" 
+    [options]="options" 
+    className="btn-page2"></app-filtros>
+<br>
+
+<div class="flex justify-content-center w-full">
+  <p-fieldset legend="SERVICIOS" [toggleable]="true" class="w-full">
+
+    <div class="flex justify-content-center gap-2 w-full">
+        <p-avatar 
+            (click)="cambiarFecha()"
+            styleClass="mr-2 custom-avatar" 
+            size="xlarge">
+            <span>{{mesNombreSeleccionado}} <i class="pi pi-calendar" size="xlarge"></i></span>
+        </p-avatar>
+    
+        <p-avatar 
+            (click)="cambiarFecha()"
+            styleClass="mr-2 custom-avatar" 
+            size="xlarge">
+            <span>{{anioSeleccionado}} <i class="pi pi-calendar" size="xlarge"></i></span>
+        </p-avatar>
+    </div>
+    <br>
+    <div class="flex justify-content-center gap-2 w-full" *ngIf="visibleCalendario">
+        <p-calendar #selectFecha
+            class="max-w-full"
+            [(ngModel)]="fechaSeleccionada" 
+            [inline]="true"
+            view="month" 
+            dateFormat="mm/yy" 
+            (onSelect)="onSelectFecha($event)"
+            [readonlyInput]="true" />
+    </div>
+
+    <div class="flex justify-content-center gap-2 w-full">
+        <h1 class="text-primary">SERVICIOS</h1>
+    </div>
+    <app-serviciosViewList [mes]="mesSeleccionado" [anio]="anioSeleccionado"></app-serviciosViewList>
+
+  </p-fieldset>
+</div>

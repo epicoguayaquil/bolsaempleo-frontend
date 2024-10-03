@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeflex/primeflex.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+.btn-white{
+    background-color: white;
+    color: black;
+}
+
+.boton-fijo {
+    position: fixed; /* El botón permanecerá en la misma posición en la pantalla */
+    top: 10px; /* Distancia desde la parte superior */
+    right: 10px; /* Distancia desde la parte derecha */
+    /*padding: 10px 20px;*/
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    z-index: 1000; /* Asegura que el botón esté siempre por encima de otros elementos */
+}
+
+.p-dataview .p-dataview-header {
+    background: center !important;
+    border-top: none !important;
+}
+
+.col-complete{
+    width: 100%;
+}
+
+.grid-form > .col, .grid-form > [class*=col-] {
+    padding-top: 1.5rem;
+}
+
+.app-select.ng-dirty.ng-invalid > p-dropdown > .p-dropdown {
+    border-color: #f87171;
+}
+
+.altura-page-min{
+    min-height: 500px;
+}
+.altura-page-min > .p-datatable-wrapper{
+    min-height: 500px;
+}
+.pading-check{
+    padding-top: 30px;
+}
+
+@media (min-width: 768px) {
+    .btn-page{
+        margin-top: -10%;
+    }
+    .btn-page2{
+        margin-top: -5%;
+    }
+}
+
+.custom-card .p-card-content {
+    padding: 0;
+}
+
+.custom-card .p-card-title {
+    text-align: center;
+}
+
+.custom-avatar{
+    width: auto;
+    padding: 20px;
+    min-width: 150px;
+}
+
+.customMenuBar{
+    border: 0px solid #e5e7eb;
+}
+
+.customMenu{
+    border-radius: 0px 0px 6px 6px;
+    border-top: 0px;
+    background-color: #F9FAFB;
+    min-height: 87vh;
+}

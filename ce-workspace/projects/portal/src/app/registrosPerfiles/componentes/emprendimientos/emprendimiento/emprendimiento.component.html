@@ -1,0 +1,113 @@
+<form [formGroup]="formDatos" Class="col-complete">
+  <div class="flex align-items-center justify-content-center">
+    
+    <div class="grid">
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 flex justify-content-center" *ngIf="visibletitulo">
+        <h3>DATOS DEL EMPRENDIMIENTO</h3>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12" *ngIf="mostrarCampo('nombre')">
+        <label for="nombre">Nombre</label>
+        <input pInputText id="nombre" formControlName="nombre" class="col-complete"
+              appUppercase
+              [ngClass]="{'ng-invalid': fieldIsValid('nombre'), 'ng-dirty': fieldIsValid('nombre')}"
+              ngClass="col-complete" />
+        <app-formMensageError [control]="formDatos.controls['nombre']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_tipo_emprendimiento')">
+        <label for="id_tipo_emprendimiento">Tipo de Emprendimiento:</label>
+        <app-selectTipoEmprendimiento formControlName="id_tipo_emprendimiento" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_tipo_emprendimiento'), 'ng-dirty': fieldIsValid('id_tipo_emprendimiento')}"></app-selectTipoEmprendimiento>
+        <app-formMensageError [control]="formDatos.controls['id_tipo_emprendimiento']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="mostrarCampo('id_etapa_emprendimiento')">
+        <label for="id_etapa_emprendimiento">Etapa de tu Emprendimiento:</label>
+        <app-selectEtapaEmprendimiento formControlName="id_etapa_emprendimiento" [returnId]="true"
+          class="app-select"
+          [ngClass]="{'ng-invalid': fieldIsValid('id_etapa_emprendimiento'), 'ng-dirty': fieldIsValid('id_etapa_emprendimiento')}"></app-selectEtapaEmprendimiento>
+        <app-formMensageError [control]="formDatos.controls['id_etapa_emprendimiento']" [submited]="submited"></app-formMensageError>
+      </div>
+
+
+
+
+
+
+
+
+      <div class="{{classFiels}}  "  *ngIf="mostrarCampo('esta_formalizado')">
+        <label for="esta_formalizado">Su emprendimiento esta formalizado</label>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 ">
+          <p-selectButton [options]="opcionesSINO" optionLabel="label" optionValue="value" formControlName="esta_formalizado" (onChange)="formalizado()"/>
+        </div>
+        <app-formMensageError [control]="formDatos.controls['esta_formalizado']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}} "  *ngIf="formDatos.controls['esta_formalizado'].value == 'SI'">
+        <label for="persona">Figura legal</label>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+          <app-selectFiguraLegal formControlName="persona" [ngClass]="{'ng-invalid': fieldIsValid('persona'), 'ng-dirty': fieldIsValid('persona')}" />
+        </div>
+        <app-formMensageError [control]="formDatos.controls['persona']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}} "  *ngIf="formDatos.controls['esta_formalizado'].value == 'SI'">
+        <label for="opera_ruc_rise">Cuenta con RUC, RISE, RIMPE</label>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 ">
+          <app-selectTipoRegimen formControlName="opera_ruc_rise" [ngClass]="{'ng-invalid': fieldIsValid('opera_ruc_rise'), 'ng-dirty': fieldIsValid('opera_ruc_rise')}" />
+        </div>
+        <app-formMensageError [control]="formDatos.controls['opera_ruc_rise']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="formDatos.controls['opera_ruc_rise'].value">
+        <label for="ruc_rise">Escriba el numero de su {{formDatos.controls['opera_ruc_rise'].value}}</label>
+        <p-inputMask mask="9999999999999" formControlName="ruc_rise" placeholder="0999999999001" 
+          [ngClass]="{'ng-invalid': fieldIsValid('ruc_rise'), 'ng-dirty': fieldIsValid('ruc_rise')}"
+          class="col-complete" styleClass="col-complete"/>
+        <app-formMensageError [control]="formDatos.controls['ruc_rise']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="formDatos.controls['esta_formalizado'].value == 'NO'">
+        <label for="desea_formalizarse">Desea formalizarse</label>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12 ">
+          <p-selectButton [options]="opcionesSINO" optionLabel="label" optionValue="value" formControlName="desea_formalizarse" (onChange)="formalizado()"/>
+        </div>
+        <app-formMensageError [control]="formDatos.controls['desea_formalizarse']" [submited]="submited"></app-formMensageError>
+      </div>
+
+
+
+
+
+
+      <div class="{{classFiels}} " *ngIf="mostrarCampo('realizado_prestado')">
+        <label for="realizado_prestado">Has recibido financiamiento</label>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12">
+          <p-selectButton [options]="opcionesSINO" optionLabel="label" optionValue="value" formControlName="realizado_prestado" (onChange)="realizadoPrestamo()"/>
+        </div>
+        <app-formMensageError [control]="formDatos.controls['realizado_prestado']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="{{classFiels}}" *ngIf="formDatos.controls['realizado_prestado'].value === 'SI'">
+        <label for="tipos_financimiento">Tipos de Financiamientos: </label>
+        <app-selectMultipleTipoFinanciamiento formControlName="tipos_financimiento"></app-selectMultipleTipoFinanciamiento>
+        <app-formMensageError [control]="formDatos.controls['tipos_financimiento']" [submited]="submited"></app-formMensageError>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-12" *ngIf="mostrarCampo('descripcion')">
+        <label for="descripcion">Descripción:</label>
+        <textarea pInputTextarea id="descripcion" formControlName="descripcion" class="col-complete"
+              appUppercase rows="5" cols="30"
+              [ngClass]="{'ng-invalid': fieldIsValid('descripcion'), 'ng-dirty': fieldIsValid('descripcion')}"
+              ngClass="col-complete"> </textarea>
+        
+        <app-formMensageError [control]="formDatos.controls['descripcion']" [submited]="submited"></app-formMensageError>
+      </div>
+
+    </div>
+
+  </div>
+</form>

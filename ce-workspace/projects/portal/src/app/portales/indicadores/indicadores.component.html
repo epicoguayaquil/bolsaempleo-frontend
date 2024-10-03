@@ -1,0 +1,23 @@
+<p-card header="Registro de Actividades" styleClass="altura-page-min">
+  <app-tablaVistaDatos 
+    [lista]="indicadores"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['indicador', 'programa', 'sub_programa', 'empresa_aliada', 'fecha']"
+    [paginator]="true"
+    [columnsView]="columnsView"
+    (newRecord)="nuevo()"
+    (editRecord)="editar($event)">
+  </app-tablaVistaDatos>
+</p-card>
+
+
+<p-dialog 
+    header="Registro de Actividad" 
+    [modal]="true"
+    [(visible)]="visibleModal" 
+    [style]="{ width: '75rem' }" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+    [maximizable]="true">
+    <app-registroActividadIndicador [registro]="indicador" (canceled)="cancelar()" (saved)="grabado($event)"></app-registroActividadIndicador>
+</p-dialog>

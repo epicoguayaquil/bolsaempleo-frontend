@@ -1,0 +1,23 @@
+
+<p-dropdown #select
+    [options]="listaItems"
+    [(ngModel)]="selectItem"
+    optionLabel="nombre"
+    [filter]="true"
+    filterBy="nombre" 
+    [showClear]="true"
+    [loading]="this.loading"
+    [disabled]="isDisabled"
+    [style]="{'width': '100%'}"
+    placeholder="Selecciona la provincia">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption.nombre }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-provincia pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ provincia.nombre }}</div>
+            </div>
+        </ng-template>
+</p-dropdown>
