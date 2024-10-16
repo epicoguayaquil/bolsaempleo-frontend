@@ -4,9 +4,10 @@
 **BackOffice EPICO** proporciona al usuario una herramienta para la gestión de las diferentes opciones que disponen los portales de EPICO. Este sistema centraliza y optimiza el mantenimiento y la administración de funcionalidades clave como catálogos, centros de emprendimiento, bolsas de empleo, y más.
 
 ## Tecnologías Utilizadas
-- **Framework:** Angular 18
+- **Framework:** Angular 18 => https://angular.dev/
 - **Lenguaje:** TypeScript
 - **Gestor de Paquetes:** npm (Node Package Manager)
+- **PrimerNG => https://primeng.org/
 
 ## Instalación y Configuración
 
@@ -65,10 +66,29 @@ git add .
 git commit -m 'Mensaje del commit'
 git push origin dev/nombre-de-la-rama
 ```
-
 * Crea una nueva solicitud de extracción desde tu repositorio forkeado (Haz clic en el botón `New Pull Request` ubicado en la parte superior de tu repositorio)
 * ¡Espera la revisión de tu PR y la aprobación de la fusión!
 * __¡Dale una estrella a este repositorio__ si te ha gustado!
+
+## Como Crear un Componente
+* Te vas a la ruta del proyecto, en la carpeta que deseas crear el component
+* ejecutas el comando
+```markdown
+ng generate component --standalone nombre-componente 
+```
+## Como Crear un Pagina
+* Realizas los pasos para crear un componente
+* luego lo agregas en el archivo app.routes.ts que se encuentra dentro del proyecto
+```markdown
+export const routes: Routes = [
+...
+{
+	path:'login',
+	component: LoginComponent
+}
+...
+]
+```
 
 ## Agrega tu nombre al listado de contribuidores
 ### 1. Añade tu nombre
