@@ -5,7 +5,7 @@ Proporcionar al usuario una herramienta para la publicación de las ofertas labo
 
 ## Tecnologías Utilizadas
 - Angular 18 => https://angular.dev/
-- PromerNG 17 => https://primeng.org/
+- PrimerNG 17 => https://primeng.org/
 
 ## Instalación y Configuración
 Para levantar el proyecto, ejecutar:
