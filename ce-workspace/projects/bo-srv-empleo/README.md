@@ -31,7 +31,7 @@ npm run start:bolsa-empleo
 ## Crear Componente en Angular
 Para generar un componente puedes ejecutar el comando 
 ```bash
-ng generate component --standalone pizza
+ng generate component --standalone nombre-componente
 ```
 Puedes revisar la siguiente url => https://angular.dev/
   
