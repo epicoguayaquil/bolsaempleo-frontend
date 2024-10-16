@@ -1,4 +1,4 @@
-# BackOffice EPICO
+# FrontEnd EPICO
 
 ## Descripción
 **BackOffice EPICO** proporciona al usuario una herramienta para la gestión de las diferentes opciones que disponen los portales de EPICO. Este sistema centraliza y optimiza el mantenimiento y la administración de funcionalidades clave como catálogos, centros de emprendimiento, bolsas de empleo, y más.
