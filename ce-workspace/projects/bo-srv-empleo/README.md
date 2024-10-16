@@ -4,7 +4,8 @@
 Proporcionar al usuario una herramienta para la publicación de las ofertas laborales y gestionar las postulaciones e invitaciones a postular.
 
 ## Tecnologías Utilizadas
-- Angular 18
+- Angular 18 => https://angular.dev/
+- PromerNG 17 => https://primeng.org/
 
 ## Instalación y Configuración
 Para levantar el proyecto, ejecutar:
@@ -26,7 +27,14 @@ npm run start:bolsa-empleo
 		- app.component.html
 		- app.component.ts
 		- app.routes.ts
-		
+
+## Crear Componente en Angular
+Para generar un componente puedes ejecutar el comando 
+```bash
+ng generate component --standalone pizza
+```
+Puedes revisar la siguiente url => https://angular.dev/
+  
 ## Autor o Equipo de Desarrollo
 EPICO
 
