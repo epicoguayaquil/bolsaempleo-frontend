@@ -1,4 +1,4 @@
-# Bolsa de Empleo BackOffice
+# Bolsa de Empleo Front End
 
 ## Descripción Breve
 Proporcionar al usuario una herramienta para la publicación de las ofertas laborales y gestionar las postulaciones e invitaciones a postular.
